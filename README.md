@@ -1,4 +1,4 @@
-# projetVD
+# Projet Visualisation de Données - World Conflics
 ## Dataset
 Histoire des conflits
 https://www.kaggle.com/ramjasmaurya/conflicts-among-nations/
@@ -10,4 +10,6 @@ Un fichier .csv et un tableau semblable à un tableau excel.
 Nous voulons montrer les zones qui ont vécu le plus de conflit sur la Terre. De cette manière nous pourrons avoir une vue plus globale de l'histoire et nous rendre compte que nous ne sommes pas le centre du monde. Nous allons donc placer cela sur une carte du monde pour que ce soit plus pertinent.
 ## Références
 Wikipedia, geoconfluences, populationdata  l'ont fait dans le but d'informer et de produire du contenu historique plus pertinent et parlant que si c'était du simple texte.
+## Wireframe
+[Figma](https://www.figma.com/file/XzKVHJ52Q9ZBgQNcDv2TVm/VisualDon?node-id=0%3A1)
 
