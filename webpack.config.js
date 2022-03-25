@@ -1,10 +1,29 @@
 const path = require('path');const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/*
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: './public/index.html',
     filename: 'index.html',
     inject: 'body'
 })
+*/
+plugins: [
+
+    new HtmlWebpackPlugin({
+        template: './public/index.html',
+        filename: 'index.html',
+        inject: 'body'
+    }),
+  
+    new HtmlWebpackPlugin({
+        template: './public/map.html',
+        filename: 'inmapdex.html'
+    }),
+  
+    new UglifyJsPlugin(),
+  
+  ]
+
 
 module.exports = {
     name: 'browser',
