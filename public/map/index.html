@@ -4,13 +4,74 @@
     <meta charset="UTF-8">
     <title>Conflicts Map</title>
     <link rel="shortcut icon" href="../assets/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap" rel="stylesheet">
     <style>
         html, body { margin: 0; height: 100%; overflow: hidden }
+        h1, h2 {position: absolute;}
+
+        #year {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            border: solid #676767 1px;
+            border-radius: 50%;
+            font-family: 'Red Hat Display', sans-serif;
+            font-size: 50px;
+            color: #676767;
+            text-align: center;
+            background: #cdcdcd;
+            left: 45vw;
+            bottom: 20px;
+        }
+
+        span{
+            position: absolute;
+            left: 49.5vw;
+            z-index: 2;
+            color: #676767;
+        }
+
+        span.up {
+            bottom: 140px;
+        }
+
+        span.down {
+            bottom: 30px;
+        }
+
+        div.card {	
+            position: absolute;			
+            text-align: center;			
+            width: 150px;					
+            height: 100px;					
+            padding: 2px;				
+            font: 10px sans-serif;		
+            background: #ffffff;	
+            border: 0px;		
+            border-radius: 8px;	
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);		
+            pointer-events: none;		
+        }
+
+        div.card h3 {
+            font: 12px sans-serif bold;
+            
+        }
+        div.card p {
+            font: 10px sans-serif;
+        }
+
     </style>
 </head>
 <body>
-    <h1>map</h1>
-    <h2 id="year">1500</h2>
-    <div id="#map"></div>
+    <span class="material-icons up">keyboard_double_arrow_up</span>
+    <div id="year">1500</div>
+    <span class="material-icons down">keyboard_double_arrow_down</span>
+    <div id="map"></div>
 </body>
 </html>
