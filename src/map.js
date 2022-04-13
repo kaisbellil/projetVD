@@ -60,16 +60,7 @@ let card = d3.select("body").append("div")
     .attr("class", "card")				
     .style("opacity", 0);
 
-window.addEventListener('wheel', (e) => {  
-    if (e.deltaY < 0) {
-        if (year > 1500)    
-            year--
-    } else {
-        if (year < 2022)    
-            year++
-    }
-    textYear.text(year);
-
+function placePoints() {
     conflictsList = getConflictsByYear(year)
     
     // Remove all circles
@@ -113,6 +104,19 @@ window.addEventListener('wheel', (e) => {
             })
         }
     });
+}
+
+window.addEventListener('wheel', (e) => {  
+    if (e.deltaY < 0) {
+        if (year > 1500)    
+            year--
+    } else {
+        if (year < 2022)    
+            year++
+    }
+    textYear.text(year);
+
+    placePoints();
 })
 
 /** MAP **/
@@ -121,6 +125,7 @@ let svg = d3.select("#map")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("z-index", "0")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -163,3 +168,18 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
 }).then(function(){
 })
 
+let upButton = d3.select("span.up").on("click", function() {
+    if (year > 1500) { 
+        year--
+        textYear.text(year);
+        placePoints();
+    }
+});
+
+let downButton = d3.select("span.down").on("click", function() {
+    if (year < 2022) { 
+        year++
+        textYear.text(year);
+        placePoints();
+    }
+});
