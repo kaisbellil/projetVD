@@ -2,6 +2,11 @@ import * as d3 from 'd3';
 import conflicts from '../data/conflicts.csv';
 import countries from '../data/countries.csv';
 
+/**
+ * Function to get all conflicts that happend from 1500 to given year
+ * @param {*} year 
+ * @returns All conflict from 1500 to specified year
+ */
 function getConflictsByYear(year) {
     let conflictsList = [];
 
@@ -14,6 +19,14 @@ function getConflictsByYear(year) {
     return conflictsList;
 }
 
+/**
+ * Function to get the number of time a country had a conflict up to the year given.
+ * Will be used later to determine the radius of his circle.
+ * @param {Array} conflictsList List of conflicts
+ * @param {String} country Country you search
+ * @param {Integer} year Up to what year to search
+ * @returns Number of time a country had a conflict
+ */
 function countCountryOccurence(conflictsList, country, year) {
     let count = 3;
     conflictsList.forEach(conflict => {
@@ -25,6 +38,11 @@ function countCountryOccurence(conflictsList, country, year) {
     return count;
 }
 
+/**
+ * Function to get all informations about a specified country (such as latitude, longitude, etc.)
+ * @param {*} country The country searched
+ * @returns The country fund or null if not fund
+ */
 function findCountryInList(country) {
     let countryFund = {}
 
@@ -36,6 +54,12 @@ function findCountryInList(country) {
     return countryFund;
 }
 
+/**
+ * Function to know how many lines a text is need to display a number of words.
+ * @param {*} title Title of the conflict (headline)
+ * @param {*} description Description of the conflict
+ * @returns Number of line based on the words count
+ */
 function calculateNumberOfLines(title, description) {
     let titleWidth = title.split(" ").length;
     let descriptionWidth = description.split(" ").length;
@@ -51,7 +75,6 @@ let margin = {top: 20, right: 20, bottom: 30, left: 50},
 
 let year = 1500;
 let textYear = d3.select('#year');
-let lastScrollTop = 0;
 
 let conflictsList = []
 
@@ -60,6 +83,9 @@ let card = d3.select("body").append("div")
     .attr("class", "card")				
     .style("opacity", 0);
 
+/**
+ * Method to place points of conflicts on the map
+ */
 function placePoints() {
     conflictsList = getConflictsByYear(year)
     
@@ -106,6 +132,12 @@ function placePoints() {
     });
 }
 
+// Increase/descrease year based on the mouse wheel rotation (scroll) 
+// and place pou
+/**
+ * Increase/descrease year based on the mouse wheel rotation (scroll) 
+ * and place points on map.
+ */
 window.addEventListener('wheel', (e) => {  
     if (e.deltaY < 0) {
         if (year > 1500)    
@@ -120,7 +152,6 @@ window.addEventListener('wheel', (e) => {
 })
 
 /** MAP **/
-
 let svg = d3.select("#map")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -146,7 +177,7 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .attr("d", d3.geoPath()
             .projection(projection)
         )
-        // set id
+        // Set id
         .attr("id", function(d){ return d.properties.name;})
         .attr("fill", function(d) {
             // Make Antarctica disappear (fill)
@@ -168,6 +199,7 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
 }).then(function(){
 })
 
+// Increase year on up button click
 let upButton = d3.select("span.up").on("click", function() {
     if (year > 1500) { 
         year--
@@ -176,6 +208,7 @@ let upButton = d3.select("span.up").on("click", function() {
     }
 });
 
+// Decrease year on down button click
 let downButton = d3.select("span.down").on("click", function() {
     if (year < 2022) { 
         year++
