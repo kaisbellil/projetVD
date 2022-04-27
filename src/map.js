@@ -61,9 +61,9 @@ function findCountryInList(country) {
  * @returns Number of line based on the words count
  */
 function calculateNumberOfLines(title, description) {
-    let titleWidth = title.split(" ").length;
-    let descriptionWidth = description.split(" ").length;
-    let nbrWords = titleWidth + descriptionWidth
+    let titleLength = title.split(" ").length;
+    let descriptionLength = description.split(" ").length;
+    let nbrWords = titleLength + descriptionLength
     return Math.round(nbrWords/6);
 }
 
@@ -72,7 +72,6 @@ let margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = window.innerHeight - margin.top - margin.bottom;
 
 /** SCROLL EVENT **/
-
 let year = 1500;
 let textYear = d3.select('#year');
 
