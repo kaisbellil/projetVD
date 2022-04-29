@@ -29,6 +29,20 @@
             bottom: 20px;
         }
 
+        input:focus {
+            outline:none;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         span {
             position: absolute;
             left: 49.5vw;
@@ -67,6 +81,18 @@
             font: 10px sans-serif;
         }
 
+        div.card hr {
+            border-top: 1px solid #676767;
+            width:80%;
+            text-align: center;
+        }
+
+        div.card h4:first-child {
+            font: 10px sans-serif bold;
+            margin-bottom: 0;
+        }
+
+
         .noselect {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -102,7 +128,8 @@
 </head>
 <body>
     <span class="material-icons up noselect">keyboard_double_arrow_up</span>
-    <div id="year">1500</div>
+    <input type="number" id="year" value="1500">
+    <!-- <div id="year">1500</div> -->
     <span class="material-icons down noselect">keyboard_double_arrow_down</span>
     <div id="map"></div>
     <div id="bottomTitle">

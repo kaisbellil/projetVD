@@ -118,7 +118,7 @@ function placePoints() {
                 console.log();
                 card.transition()
                      .duration('50')
-                     card.html("<h3>" + title + "</h3><p>" + description + "</p>")
+                     card.html("<h3>" + title + "</h3><p>" + description + "</p>" + "<hr> <h4>" + conflict.Country + ", " + conflict.Date + "</h4>")
                      .style("height", "auto")
                      .style("left", window.event.clientX + "px")		
                      .style("top", window.event.clientY + "px")
@@ -147,11 +147,20 @@ window.addEventListener('wheel', (e) => {
     } else {
         if (year < 2022)    
             year++
+            
     }
-    textYear.text(year);
+    textYear.property('value', year);
+    //textYear.text(year);
 
     placePoints();
 })
+
+textYear.on("change", inputYear)
+
+function inputYear() {
+    year = parseInt(textYear.property('value'));
+    placePoints();
+}
 
 /** MAP **/
 let svg = d3.select("#map")
