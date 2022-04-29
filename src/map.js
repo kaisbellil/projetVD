@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import conflicts from '../data/conflicts.csv';
-import countries from '../data/countries.csv';
+import countries from '../data/countriesUpdated.csv';
 
 /**
  * Function to get all conflicts that happend from 1500 to given year
@@ -10,9 +10,10 @@ import countries from '../data/countries.csv';
 function getConflictsByYear(year) {
     let conflictsList = [];
 
-    conflicts.forEach(conflic => {
-        if (conflic.Date <= year && conflic.Date >= 1500) {
-            conflictsList.push(conflic);
+    conflicts.forEach(conflict => {
+        if (conflict.Date <= year && conflict.Date >= 1500 
+            || typeof conflict.Date == "string" && parseInt(conflict.Date.substring(0, 4)) <=  year && parseInt(conflict.Date.substring(0, 4)) >=  1500){
+            conflictsList.push(conflict);
         }
     });
 
@@ -30,7 +31,7 @@ function getConflictsByYear(year) {
 function countCountryOccurence(conflictsList, country, year) {
     let count = 3;
     conflictsList.forEach(conflict => {
-        if (conflict.Country == country && conflict.Date <= year ) {
+        if (conflict.Country == country && conflict.Date <= year) {
             count+=.2;
         }
     });
@@ -72,7 +73,7 @@ let margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = window.innerHeight - margin.top - margin.bottom;
 
 /** SCROLL EVENT **/
-let year = 1500;
+let year = 1800;
 let textYear = d3.select('#year');
 
 let conflictsList = []
@@ -89,10 +90,26 @@ function placePoints() {
     conflictsList = getConflictsByYear(year)
     
     // Remove all circles
-    svg.selectAll("circle").remove()
+    svg.selectAll("circle").remove();
 
     // Place points
     conflictsList.forEach(conflict => {
+
+        if (conflict.Country.includes(",")) {
+            let allCountries = conflict.Country.split(",");
+            allCountries = allCountries.map(function (element) {
+                return element.trim();
+            });
+
+            let conflictToAdd = conflict;
+
+            allCountries.forEach(country => {
+                conflictToAdd.Country = country;
+                conflictsList.push(conflictToAdd)
+            });
+ 
+        }
+        
 
         let latitude = findCountryInList(conflict.Country).latitude;
         let longitude = findCountryInList(conflict.Country).longitude;
