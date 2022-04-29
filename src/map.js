@@ -55,19 +55,6 @@ function findCountryInList(country) {
     return countryFund;
 }
 
-/**
- * Function to know how many lines a text is need to display a number of words.
- * @param {*} title Title of the conflict (headline)
- * @param {*} description Description of the conflict
- * @returns Number of line based on the words count
- */
-function calculateNumberOfLines(title, description) {
-    let titleLength = title.split(" ").length;
-    let descriptionLength = description.split(" ").length;
-    let nbrWords = titleLength + descriptionLength
-    return Math.round(nbrWords/6);
-}
-
 let margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = window.innerWidth - margin.left - margin.right,
     height = window.innerHeight - margin.top - margin.bottom;
@@ -119,7 +106,6 @@ function placePoints() {
 
             let title = conflict.Headline;
             let description = conflict.Description;
-            let nbrLines = calculateNumberOfLines(title,description)
 
             svg.append("circle")
             .attr("r",radius)
@@ -132,8 +118,8 @@ function placePoints() {
                 console.log();
                 card.transition()
                      .duration('50')
-                     .style("height", nbrLines*25 + "px");
-                     card.html("<h3>" + title + "</h3><p>" + description + "</p>")	
+                     card.html("<h3>" + title + "</h3><p>" + description + "</p>")
+                     .style("height", "auto")
                      .style("left", window.event.clientX + "px")		
                      .style("top", window.event.clientY + "px")
                      .style("opacity", 1)
