@@ -60,7 +60,7 @@ let margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = window.innerHeight - margin.top - margin.bottom;
 
 /** SCROLL EVENT **/
-let year = 1800;
+let year = 1500;
 let textYear = d3.select('#year');
 
 let conflictsList = []
