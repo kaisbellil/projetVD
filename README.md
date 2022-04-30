@@ -1,4 +1,4 @@
-# Projet Visualisation de Données - World Conflics
+# Projet Visualisation de Données - World Conflicts
 ## Dataset
 Histoire des conflits
 https://www.kaggle.com/ramjasmaurya/conflicts-among-nations/
