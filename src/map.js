@@ -3,16 +3,16 @@ import conflicts from '../data/conflicts.csv';
 import countries from '../data/countriesUpdated.csv';
 
 /**
- * Function to get all conflicts that happend from 1500 to given year
+ * Function to get all conflicts that happend from 1800 to given year
  * @param {*} year 
- * @returns All conflict from 1500 to specified year
+ * @returns All conflict from 1800 to specified year
  */
 function getConflictsByYear(year) {
     let conflictsList = [];
 
     conflicts.forEach(conflict => {
-        if (conflict.Date <= year && conflict.Date >= 1500 
-            || typeof conflict.Date == "string" && parseInt(conflict.Date.substring(0, 4)) <=  year && parseInt(conflict.Date.substring(0, 4)) >=  1500){
+        if (conflict.Date <= year && conflict.Date >= 1800 
+            || typeof conflict.Date == "string" && parseInt(conflict.Date.substring(0, 4)) <=  year && parseInt(conflict.Date.substring(0, 4)) >=  1800){
             conflictsList.push(conflict);
         }
     });
@@ -60,7 +60,7 @@ let margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = window.innerHeight - margin.top - margin.bottom;
 
 /** SCROLL EVENT **/
-let year = 1500;
+let year = 1800;
 let textYear = d3.select('#year');
 
 let conflictsList = []
@@ -142,7 +142,7 @@ function placePoints() {
  */
 window.addEventListener('wheel', (e) => {  
     if (e.deltaY < 0) {
-        if (year > 1500)    
+        if (year > 1800)    
             year--
     } else {
         if (year < 2022)    
@@ -206,14 +206,16 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
                 return "#ffffff";
             }
         })
+        .style('filter', "drop-shadow(30px 10px 4px #4444dd)")
 
 
 })
 
 // Increase year on up button click
 let upButton = d3.select("span.up").on("click", function() {
-    if (year > 1500) { 
-        year--
+    if (year < 2022) { 
+        year++
+        textYear.property('value', year);
         textYear.text(year);
         placePoints();
     }
@@ -221,8 +223,9 @@ let upButton = d3.select("span.up").on("click", function() {
 
 // Decrease year on down button click
 let downButton = d3.select("span.down").on("click", function() {
-    if (year < 2022) { 
-        year++
+    if (year > 1800) { 
+        year--
+        textYear.property('value', year);
         textYear.text(year);
         placePoints();
     }
@@ -233,11 +236,9 @@ let nIntervId;
 
 function animate() {
     if (!nIntervId) {
-          nIntervId = setInterval(play, 100);
+          nIntervId = setInterval(play, 50);
     }
 }
-
-let i = 1500;
 
 function play() {
     if(year == 2022) {
@@ -253,9 +254,27 @@ function play() {
 function stop() {
     clearInterval(nIntervId);
     nIntervId = null;
-  }
-
-  document.getElementById("play").addEventListener("click", animate);
-document.getElementById("stop").addEventListener("click", stop);
+}
 
 
+let play_btn = d3.select("#play");
+let pause_btn = d3.select("#stop");
+let reset_btn = d3.select("#reset");
+
+play_btn.on("click", function() {
+    animate()
+    play_btn.style("visibility", "hidden");
+    pause_btn.style("visibility", "visible");
+  });
+
+pause_btn.on("click", function() {
+    stop();
+    play_btn.style("visibility", "visible");
+    pause_btn.style("visibility", "hidden");
+  });
+
+reset_btn.on("click", function() {
+    year=1800;
+    textYear.property('value', year);
+    placePoints(); 
+  });
