@@ -150,7 +150,6 @@ window.addEventListener('wheel', (e) => {
             
     }
     textYear.property('value', year);
-    //textYear.text(year);
 
     placePoints();
 })
@@ -158,7 +157,14 @@ window.addEventListener('wheel', (e) => {
 textYear.on("change", inputYear)
 
 function inputYear() {
+    
     year = parseInt(textYear.property('value'));
+    if (year < 1800) {
+        year = 1800;
+    } else if(year > 2022) {
+        year = 2022;
+    }
+    textYear.property('value', year);
     placePoints();
 }
 
@@ -206,7 +212,6 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
                 return "#ffffff";
             }
         })
-        .style('filter', "drop-shadow(30px 10px 4px #4444dd)")
 
 
 })
