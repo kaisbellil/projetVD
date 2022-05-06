@@ -231,7 +231,6 @@ let downButton = d3.select("span.down").on("click", function() {
     }
 });
 
-
 let nIntervId;
 
 function animate() {
@@ -248,7 +247,6 @@ function play() {
         textYear.property('value', year);
         placePoints(); 
     }
-    
 }
 
 function stop() {
@@ -256,23 +254,25 @@ function stop() {
     nIntervId = null;
 }
 
-
 let play_btn = d3.select("#play");
 let pause_btn = d3.select("#stop");
 let reset_btn = d3.select("#reset");
 
+// Play and hide button, show pause button
 play_btn.on("click", function() {
     animate()
     play_btn.style("visibility", "hidden");
     pause_btn.style("visibility", "visible");
-  });
+});
 
+// Pause and hide button, show play button
 pause_btn.on("click", function() {
     stop();
     play_btn.style("visibility", "visible");
     pause_btn.style("visibility", "hidden");
   });
 
+// Reset to 1800
 reset_btn.on("click", function() {
     year=1800;
     textYear.property('value', year);

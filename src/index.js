@@ -1,10 +1,7 @@
 import * as d3 from 'd3'
 
-console.log("testIndex");
+let img = d3.select('#img')
 
-// Pour importer les données
-// import file from '../data/data.csv'
+i = 0;
 
-
-
-
+document.getElementById('img').style.left="10px";
