@@ -208,7 +208,6 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         })
 
 
-}).then(function(){
 })
 
 // Increase year on up button click
@@ -228,3 +227,35 @@ let downButton = d3.select("span.down").on("click", function() {
         placePoints();
     }
 });
+
+
+let nIntervId;
+
+function animate() {
+    if (!nIntervId) {
+          nIntervId = setInterval(play, 100);
+    }
+}
+
+let i = 1500;
+
+function play() {
+    if(year == 2022) {
+        stop
+    } else { 
+        year++;
+        textYear.property('value', year);
+        placePoints(); 
+    }
+    
+}
+
+function stop() {
+    clearInterval(nIntervId);
+    nIntervId = null;
+  }
+
+  document.getElementById("play").addEventListener("click", animate);
+document.getElementById("stop").addEventListener("click", stop);
+
+

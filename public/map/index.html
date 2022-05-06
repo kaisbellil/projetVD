@@ -123,6 +123,17 @@
             font-weight: lighter;
         }
 
+        button {
+            position: fixed;
+            bottom: 0;
+            display: inline-block;
+            z-index: 3;
+        }
+
+        button#stop {
+            left: 40px;
+        }
+
 
     </style>
 </head>
@@ -136,6 +147,10 @@
         <p class="bottomTitleBold">WORLD CONFLICTS</p>
         <p class="bottomTitleLight">| BETWEEN 1500 AND 2022</p>
     </div>
+    <button id="play">Play</button>
+    <button id="stop">Pause</button>
+
+    
 </body>
 
 </html>
