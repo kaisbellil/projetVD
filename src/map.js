@@ -246,7 +246,9 @@ function animate() {
 
 function play() {
     if(year == 2022) {
-        stop
+        stop();
+        play_btn.style("visibility", "visible");
+        pause_btn.style("visibility", "hidden");
     } else { 
         year++;
         textYear.property('value', year);
